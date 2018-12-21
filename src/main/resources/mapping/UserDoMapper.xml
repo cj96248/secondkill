@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.imooc.dao.UserDaoMapper">
-  <resultMap id="BaseResultMap" type="com.imooc.dataobkect.UserDao">
+<mapper namespace="com.imooc.dao.UserDoMapper">
+  <resultMap id="BaseResultMap" type="com.imooc.dataobject.UserDo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="gender" jdbcType="TINYINT" property="gender" />
     <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
     <result column="register_mode" jdbcType="VARCHAR" property="registerMode" />
     <result column="third_party_id" jdbcType="VARCHAR" property="thirdPartyId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, gender, age, telphone, register_mode, third_party_id
+    id, name, gender, age, telephone, register_mode, third_party_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,15 +23,15 @@
     delete from user_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.imooc.dataobkect.UserDao">
+  <insert id="insert" parameterType="com.imooc.dataobject.UserDo">
     insert into user_info (id, name, gender, 
-      age, telphone, register_mode, 
+      age, telephone, register_mode,
       third_party_id)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, 
-      #{age,jdbcType=INTEGER}, #{telphone,jdbcType=VARCHAR}, #{registerMode,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{telephone,jdbcType=VARCHAR}, #{registerMode,jdbcType=VARCHAR},
       #{thirdPartyId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.imooc.dataobkect.UserDao">
+  <insert id="insertSelective" parameterType="com.imooc.dataobject.UserDo">
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -46,8 +46,8 @@
       <if test="age != null">
         age,
       </if>
-      <if test="telphone != null">
-        telphone,
+      <if test="telephone != null">
+        telephone,
       </if>
       <if test="registerMode != null">
         register_mode,
@@ -69,8 +69,8 @@
       <if test="age != null">
         #{age,jdbcType=INTEGER},
       </if>
-      <if test="telphone != null">
-        #{telphone,jdbcType=VARCHAR},
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
       </if>
       <if test="registerMode != null">
         #{registerMode,jdbcType=VARCHAR},
@@ -80,7 +80,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.dataobkect.UserDao">
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.dataobject.UserDo">
     update user_info
     <set>
       <if test="name != null">
@@ -92,8 +92,8 @@
       <if test="age != null">
         age = #{age,jdbcType=INTEGER},
       </if>
-      <if test="telphone != null">
-        telphone = #{telphone,jdbcType=VARCHAR},
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
       </if>
       <if test="registerMode != null">
         register_mode = #{registerMode,jdbcType=VARCHAR},
@@ -104,12 +104,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.imooc.dataobkect.UserDao">
+  <update id="updateByPrimaryKey" parameterType="com.imooc.dataobject.UserDo">
     update user_info
     set name = #{name,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=TINYINT},
       age = #{age,jdbcType=INTEGER},
-      telphone = #{telphone,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
       register_mode = #{registerMode,jdbcType=VARCHAR},
       third_party_id = #{thirdPartyId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

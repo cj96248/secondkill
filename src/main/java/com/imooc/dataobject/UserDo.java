@@ -1,6 +1,6 @@
-package com.imooc.dataobkect;
+package com.imooc.dataobject;
 
-public class UserDao {
+public class UserDo {
     private Integer id;
 
     private String name;
@@ -9,7 +9,7 @@ public class UserDao {
 
     private Integer age;
 
-    private String telphone;
+    private String telephone;
 
     private String registerMode;
 
@@ -47,12 +47,12 @@ public class UserDao {
         this.age = age;
     }
 
-    public String getTelphone() {
-        return telphone;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setTelphone(String telphone) {
-        this.telphone = telphone == null ? null : telphone.trim();
+    public void setTelephone(String telephone) {
+        this.telephone = telephone == null ? null : telephone.trim();
     }
 
     public String getRegisterMode() {
