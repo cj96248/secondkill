@@ -13,6 +13,8 @@ public interface UserDoMapper {
 
     UserDo selectByPrimaryKey(Integer id);
 
+    UserDo selectByTelephone(String telephone);
+
     int updateByPrimaryKeySelective(UserDo record);
 
     int updateByPrimaryKey(UserDo record);
