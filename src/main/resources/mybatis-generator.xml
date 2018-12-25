@@ -43,6 +43,7 @@
         <table tableName="user_password" domainObjectName="UserPasswordDo">
         </table>
 -->
+        <!--
         <table tableName="item" domainObjectName="ItemDo"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -53,6 +54,20 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-
+-->
+        <!--
+        <table tableName="order_info" domainObjectName="OrderDo"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        -->
+        <!--
+        <table tableName="promo" domainObjectName="PromoDo"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        -->
     </context>
 </generatorConfiguration>
