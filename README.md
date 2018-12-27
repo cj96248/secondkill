@@ -87,18 +87,20 @@ secondkill
 
 `http://localhost:9090/getotp.html`
 
+![获取验证码](./src/main/resources/static/images/info/pic1226220152.png)
+
 ### 用户注册
 
 `http://localhost:9090/register.html`
 
-![用户注册](./src/main/resources/static/images/info/pic1226220152.png)
+
+![用户注册](./src/main/resources/static/images/info/pic1226220225.png)
 
 ### 用户登录
 
 `http://localhost:9090/login.html`
 
 ![用户注册](./src/main/resources/static/images/info/pic1226220212.png)
-
 
 ### 商品列表展示
 
