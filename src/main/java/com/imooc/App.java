@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Hello world!
+ * 启动类
  */
 @SpringBootApplication
 @MapperScan("com.imooc.dao")
