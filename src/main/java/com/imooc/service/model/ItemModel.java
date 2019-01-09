@@ -38,6 +38,11 @@ public class ItemModel {
 
     private String imageUrl;
 
+    /**
+     * promo model
+     */
+    private PromoModel promoModel;
+
     public Integer getId() {
         return id;
     }
@@ -92,5 +97,13 @@ public class ItemModel {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public PromoModel getPromoModel() {
+        return promoModel;
+    }
+
+    public void setPromoModel(PromoModel promoModel) {
+        this.promoModel = promoModel;
     }
 }

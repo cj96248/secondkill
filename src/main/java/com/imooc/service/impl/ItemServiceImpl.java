@@ -2,12 +2,16 @@ package com.imooc.service.impl;
 
 import com.imooc.dao.ItemDoMapper;
 import com.imooc.dao.ItemStockDoMapper;
+import com.imooc.dao.PromoDoMapper;
 import com.imooc.dataobject.ItemDo;
 import com.imooc.dataobject.ItemStockDo;
+import com.imooc.dataobject.PromoDo;
 import com.imooc.error.BusinessException;
 import com.imooc.error.EnumError;
 import com.imooc.service.ItemService;
+import com.imooc.service.PromoService;
 import com.imooc.service.model.ItemModel;
+import com.imooc.service.model.PromoModel;
 import com.imooc.validator.ValidationResult;
 import com.imooc.validator.ValidatorImpl;
 import org.springframework.beans.BeanUtils;
@@ -30,14 +34,17 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemStockDoMapper itemStockDoMapper;
+    
+    @Autowired
+    private PromoService promoService;
 
     @Override
     @Transactional
     public ItemModel createItem(ItemModel itemModel) throws BusinessException {
         // 1.Parameter validation
         ValidationResult validate = validator.validate(itemModel);
-        if(validate.isHasError()){
-            throw new BusinessException(EnumError.PARAMETER_VALIDATION_ERROR,validate.getMessage());
+        if(validate.isHasErrors()){
+            throw new BusinessException(EnumError.PARAMETER_VALIDATION_ERROR,validate.getErrorMessage());
         }
 
         // 2. transform item model to data object
@@ -66,7 +73,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemModel getItemById(Integer id) {
+    public ItemModel getItemById(Integer id) throws BusinessException {
         // 1 get item by id
         ItemDo itemDo = itemDoMapper.selectByPrimaryKey(id);
         if(itemDo == null){
@@ -76,6 +83,13 @@ public class ItemServiceImpl implements ItemService {
         ItemStockDo itemStockDo = itemStockDoMapper.selectByItemId(id);
 
         ItemModel itemModel = convertToItemModel(itemDo, itemStockDo);
+        
+        // 3 get promo by item id
+        PromoModel promo = promoService.getPromoByItemId(id);
+
+        if(promo != null && promo.getStatus() != 3){
+            itemModel.setPromoModel(promo);
+        }
         return itemModel;
     }
 

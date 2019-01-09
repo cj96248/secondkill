@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +36,7 @@ public class ItemController {
     }
 
     @GetMapping("id")
-    public CommonReturnType getById(Integer id){
+    public CommonReturnType getById(Integer id) throws BusinessException {
         logger.info("Query item id {}", id);
         ItemModel itemModel = itemServiceImpl.getItemById(id);
         ItemVO itemVO = convertToItemVO(itemModel);
@@ -63,6 +65,23 @@ public class ItemController {
         ItemVO itemVO = new ItemVO();
         BeanUtils.copyProperties(itemModel, itemVO);
         itemVO.setPrice(itemModel.getPrice().doubleValue());
+        if(itemModel.getPromoModel() != null){
+           itemVO.setPromoPrice(itemModel.getPromoModel().getPromoPrice());
+            LocalDateTime now = LocalDateTime.now();
+            long start = Duration.between(now,itemModel.getPromoModel().getStartTime()).getSeconds();
+            itemVO.setStartTime(start);
+            long end = Duration.between(now,itemModel.getPromoModel().getEndTime()).getSeconds();
+           itemVO.setEndTime(end);
+           itemVO.setStatus(itemModel.getPromoModel().getStatus());
+        }
         return itemVO;
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        LocalDateTime now = LocalDateTime.now();
+        Thread.sleep(1003);
+        LocalDateTime end = LocalDateTime.of(2019, 1, 9, 23, 10, 20);
+        long between = Duration.between(now, end).getSeconds();
+        System.out.println(between);
     }
 }

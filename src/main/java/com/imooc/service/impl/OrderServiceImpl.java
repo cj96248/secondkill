@@ -54,22 +54,30 @@ public class OrderServiceImpl implements OrderService {
             throw new BusinessException(EnumError.USER_NOT_LOGIN);
         }
 
+
         //check the stock
         boolean success = itemService.decreaseStock(itemId, amount);
         if(!success){
             throw new BusinessException(EnumError.PRODUCT_NOT_ENOUGH);
         }
 
+        itemService.increaseSales(itemId, amount);
+
         //save to db
         OrderModel orderModel = new OrderModel();
         orderModel.setItemId(itemId);
         orderModel.setUserId(userId);
         orderModel.setAmount(amount);
-        orderModel.setItemPrice(item.getPrice());
-        orderModel.setOrderPrice(item.getPrice().multiply(new BigDecimal(amount)));
+        if(item.getPromoModel() != null){
+            orderModel.setItemPrice(item.getPromoModel().getPromoPrice());
+            orderModel.setOrderPrice(item.getPromoModel().getPromoPrice().multiply(new BigDecimal(amount)));
+        }else{
+            orderModel.setItemPrice(item.getPrice());
+            orderModel.setOrderPrice(item.getPrice().multiply(new BigDecimal(amount)));
+        }
         orderModel.setId(generateOrderNo());
 
-        OrderDo orderDo = conveterToOrderDo(orderModel);
+        OrderDo orderDo = convertToOrderDo(orderModel);
 
         orderDoMapper.insertSelective(orderDo);
         return orderModel;
@@ -87,6 +95,7 @@ public class OrderServiceImpl implements OrderService {
         // Part 1
         LocalDate date = LocalDate.now();
         String part1 = date.format(DateTimeFormatter.BASIC_ISO_DATE);
+        builder.append(part1);
         // Part 2
         SequenceDo sequenceDo = sequenceDoMapper.getByName("order_info");
         Integer sequence = sequenceDo.getCurrentValue();
@@ -102,13 +111,8 @@ public class OrderServiceImpl implements OrderService {
         return builder.toString();
     }
 
-    public static void main(String[] args) {
-        LocalDate date = LocalDate.now();
-        String part1 = date.format(DateTimeFormatter.BASIC_ISO_DATE);
-        System.out.println(part1);
-    }
 
-    private OrderDo conveterToOrderDo(OrderModel orderModel){
+    private OrderDo convertToOrderDo(OrderModel orderModel){
         if(orderModel == null){
             return null;
         }

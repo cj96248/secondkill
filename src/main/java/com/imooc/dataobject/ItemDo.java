@@ -1,5 +1,8 @@
 package com.imooc.dataobject;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 public class ItemDo {
     private Integer id;
 
@@ -60,4 +63,5 @@ public class ItemDo {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl == null ? null : imageUrl.trim();
     }
+
 }

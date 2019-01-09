@@ -1,5 +1,8 @@
 package com.imooc.controller.viewobject;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 public class ItemVO {
     private Integer id;
 
@@ -14,6 +17,28 @@ public class ItemVO {
     private Integer sales;
 
     private String imageUrl;
+
+    /**
+     * 秒杀活动状态
+     * 0: 没有活动
+     * 1：活动未开始
+     * 2：活动进行中
+     */
+    private Integer status = 0;
+
+    private BigDecimal promoPrice = new BigDecimal(0.00);
+
+    private Integer promoId;
+
+    /**
+     * 还有多久开始
+     */
+    private long startTime;
+
+    /**
+     * 还有多久结束
+     */
+    private long endTime;
 
     public Integer getId() {
         return id;
@@ -71,16 +96,43 @@ public class ItemVO {
         this.stock = stock;
     }
 
-    @Override
-    public String toString() {
-        return "ItemVO{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", price=" + price +
-                ", description='" + description + '\'' +
-                ", stock=" + stock +
-                ", sales=" + sales +
-                ", imageUrl='" + imageUrl + '\'' +
-                '}';
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public BigDecimal getPromoPrice() {
+        return promoPrice;
+    }
+
+    public void setPromoPrice(BigDecimal promoPrice) {
+        this.promoPrice = promoPrice;
+    }
+
+    public Integer getPromoId() {
+        return promoId;
+    }
+
+    public void setPromoId(Integer promoId) {
+        this.promoId = promoId;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 }

@@ -19,7 +19,7 @@ public interface ItemService {
     /**
      * 商品详细信息浏览
      */
-    ItemModel getItemById(Integer id);
+    ItemModel getItemById(Integer id) throws BusinessException;
 
     /**
      *  库存扣减， 如果成功返回true，失败返回0

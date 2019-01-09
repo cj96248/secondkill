@@ -16,6 +16,10 @@ public class CommonUtil {
         }
     }
 
+    public static void main(String[] args) throws BusinessException {
+        System.out.println(md5("123456"));
+    }
+
     private CommonUtil(){
         throw new IllegalArgumentException();
     }
